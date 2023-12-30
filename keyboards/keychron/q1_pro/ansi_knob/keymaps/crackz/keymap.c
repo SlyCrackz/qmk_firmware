@@ -22,7 +22,8 @@ enum custom_keycodes {
     TAB_TOGGLE, // light toggle
     KC_GRV_MACRO, // grave ``` macro
     TG_L1,
-    TG_L2
+    TG_L2,
+    KC_TASK_MANAGER,
     // Other custom keycodes...
 };
 
@@ -40,6 +41,10 @@ enum custom_keycodes {
 #define myC LT(0, KC_C)
 #define TAB LT(0, KC_TAB)
 #define GRV LT(0, KC_GRV)
+
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
@@ -66,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(3),KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
     [3] = LAYOUT_ansi_82(
-        KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
+        KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK_MANAGER,  KC_FILE,  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
         TG_L2,  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,              KC_TRNS,
         L0_LIGHT_TOGGLE,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
@@ -149,6 +154,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static bool caps_lock_held = false;
 
     switch (keycode) {
+        case KC_TASK_MANAGER:
+            if (record->event.pressed) {
+                // Key pressed
+                register_code(KC_LCTL);
+                register_code(KC_LSFT);
+                tap_code(KC_ESC);       // Ctrl + Shift + Esc opens Task Manager
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LCTL);
+            }
+            return false; // Skip further processing of this key
         case TG_L1:
             if (record->event.pressed) {
                 if (layer_state_is(1)) {
@@ -276,6 +291,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Handle other layers or global keycodes here
 
     return true;
+}
+
+void keyboard_post_init_user(void) {
+    // Initialize any other keyboard settings here
+
+    // Set initial RGB state
+    layer0_light_enabled = false; // Set the flag to indicate that layer 0 lighting is off
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off RGB lighting
 }
 
 
