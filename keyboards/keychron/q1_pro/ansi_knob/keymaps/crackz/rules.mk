@@ -1,1 +1,1 @@
-VIA_ENABLE = yes
+DEBOUNCE_TYPE = none

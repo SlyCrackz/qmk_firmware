@@ -21,6 +21,15 @@
 #    define ENCODER_DEFAULT_POS 0x3
 #endif
 
+//DEBOUNCE SHIT
+//Debounce stuff
+#define USB_POLLING_INTERVAL_MS 1
+#undef DEBOUNCE
+#define DEBOUNCE 0
+
+//NKRO
+#define FORCE_NKRO
+
 #ifdef RGB_MATRIX_ENABLE
 /* RGB Matrix driver configuration */
 #    define DRIVER_COUNT 2
