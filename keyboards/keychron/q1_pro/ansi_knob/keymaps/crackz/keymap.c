@@ -133,6 +133,9 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
                     SEND_STRING("```");
                     break;
                 // Other cases...
+                default:
+                    tap_code16(long_press_keycode); // Default action for other keys
+                    break;
             }
         }
         return false;  // Skip default handling.
