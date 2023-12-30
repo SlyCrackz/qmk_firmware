@@ -16,6 +16,11 @@
 
 #include QMK_KEYBOARD_H
 
+static bool startup_animation_running = true;
+static uint32_t startup_animation_timer = 0;
+#define STARTUP_ANIMATION_DURATION 5000 // 5 seconds in milliseconds
+
+
 //clang-format off
 enum custom_keycodes {
     L0_LIGHT_TOGGLE = SAFE_RANGE, // Existing custom keycode
@@ -293,13 +298,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+void run_startup_animation(void) {
+    if (startup_animation_running) {
+        if (timer_elapsed(startup_animation_timer) > STARTUP_ANIMATION_DURATION) {
+            // Stop the animation after the duration has passed
+            startup_animation_running = false;
+            rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off RGB lighting
+        } else {
+            // Smooth hue transition
+            uint8_t hue = (timer_elapsed(startup_animation_timer) * 255) / STARTUP_ANIMATION_DURATION;
+            rgb_matrix_sethsv_noeeprom(hue, 255, 255); // Full saturation and brightness
+        }
+    }
+}
+
+
+
 void keyboard_post_init_user(void) {
     // Initialize any other keyboard settings here
+
+    // Start the startup animation
+    startup_animation_timer = timer_read();
+    startup_animation_running = true;
 
     // Set initial RGB state
     layer0_light_enabled = false; // Set the flag to indicate that layer 0 lighting is off
     rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off RGB lighting
+}
+
+void matrix_scan_user(void) {
+    run_startup_animation();
+    // Other code...
 }
 
 
