@@ -19,7 +19,10 @@
 //clang-format off
 enum custom_keycodes {
     L0_LIGHT_TOGGLE = SAFE_RANGE, // Existing custom keycode
-    TAB_TOGGLE, // New custom keycode for toggling lights
+    TAB_TOGGLE, // light toggle
+    KC_GRV_MACRO, // grave ``` macro
+    TG_L1,
+    TG_L2
     // Other custom keycodes...
 };
 
@@ -36,11 +39,11 @@ enum custom_keycodes {
 #define V LT(0, KC_V)
 #define myC LT(0, KC_C)
 #define TAB LT(0, KC_TAB)
-
+#define GRV LT(0, KC_GRV)
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
+        GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
         TAB,   Q,     W,     KC_E,     KC_R,     T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,             KC_HOME,
         KC_LSFT,            KC_Z,     KC_X,     myC,     V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
@@ -56,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [2] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
-        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
+        GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
         KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     BRACKET_OPEN,  BRACKET_CLOSE,  KC_BSLS,            KC_PGDN,
         KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     SEMI_COLON,  KC_QUOT,            KC_ENT,             KC_HOME,
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     COMMA,  PERIOD,   KC_SLSH,            KC_RSFT,  KC_UP,
@@ -64,11 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [3] = LAYOUT_ansi_82(
         KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
-        TG(2),  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,              KC_TRNS,
+        TG_L2,  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,              KC_TRNS,
         L0_LIGHT_TOGGLE,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
         KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  BAT_LVL,  NK_TOGG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,   KC_TRNS,
-        KC_TRNS,  KC_TRNS,  KC_TRNS,                                TG(1),                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS)
+        KC_TRNS,  KC_TRNS,  KC_TRNS,                                TG_L1,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS)
 
 };
 
@@ -119,12 +122,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_press_keycode) {
     if (record->tap.count == 0) {  // Key is being held.
         if (record->event.pressed) {
-            if (long_press_keycode == TAB_TOGGLE) {
-                // Custom action for long press: Toggle lights
-                layer0_light_enabled = !layer0_light_enabled;
-                layer_state_set_user(layer_state);
-            } else {
-                tap_code16(long_press_keycode); // For other keys
+            switch (long_press_keycode) {
+                case TAB_TOGGLE:
+                    // Custom action for long press: Toggle lights
+                    layer0_light_enabled = !layer0_light_enabled;
+                    layer_state_set_user(layer_state);
+                    break;
+                case KC_GRV_MACRO:
+                    // Custom action for long press: Send triple grave accent
+                    SEND_STRING("```");
+                    break;
+                // Other cases...
             }
         }
         return false;  // Skip default handling.
@@ -132,8 +140,46 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
     return true;  // Continue default handling for taps.
 }
 
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     static bool caps_lock_held = false;
+
+    switch (keycode) {
+        case TG_L1:
+            if (record->event.pressed) {
+                if (layer_state_is(1)) {
+                    layer_off(1); // Turn off Layer 1 if it's already active
+                } else {
+                    layer_clear(); // Clear all active layers
+                    layer_on(0);   // Activate Layer 0
+                    layer_on(1);   // Activate Layer 1
+                }
+            }
+            return false;
+
+        case TG_L2:
+            if (record->event.pressed) {
+                if (layer_state_is(2)) {
+                    layer_off(2); // Turn off Layer 2 if it's already active
+                } else {
+                    layer_clear(); // Clear all active layers
+                    layer_on(0);   // Activate Layer 0
+                    layer_on(2);   // Activate Layer 2
+                }
+            }
+            return false;
+
+        // ... handle other keycodes ...
+    }
+
+    // Handling for the KC_GRV_MACRO on Layer 0 and Layer 2
+    if (layer_state_is(0) || layer_state_is(2)) {
+        switch (keycode) {
+            case GRV:
+                return process_tap_or_long_press_key(record, KC_GRV_MACRO);
+        }
+    }
 
     // Special handling when Layer 0 is active
     if (layer_state_is(0)) {
@@ -228,3 +274,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     return true;
 }
+
+
