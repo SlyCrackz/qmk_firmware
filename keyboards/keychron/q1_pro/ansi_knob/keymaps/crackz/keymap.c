@@ -18,7 +18,7 @@
 
 static bool startup_animation_running = true;
 static uint32_t startup_animation_timer = 0;
-#define STARTUP_ANIMATION_DURATION 5000 // 5 seconds in milliseconds
+#define STARTUP_ANIMATION_DURATION 500 // 0.5 seconds in milliseconds
 
 
 //clang-format off
@@ -137,9 +137,8 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
  */
 
 
-#define HSV_CWHITE 0, 0, 255          // Max saturation for white
 //#define HSV_RED 255, 255, 255  // Full saturation, softer brightness for a warm orange
-#define HSV_SOFT_ORANGE 25, 255, 180  // Full saturation, softer brightness for a warm orange
+#define HSV_SOFT_ORANGE 25, 255, 255  // Full saturation, softer brightness for a warm orange
 #define HSV_OCEAN_BLUE 180, 255, 255  // Full saturation for a vivid ocean blue
 #define HSV_PASTEL_GREEN 85, 180, 255 // Lower saturation for a softer, pastel green
 #define HSV_CREAM_PINK 210, 210, 255  // Creamy pink: pink hue, reduced saturation, full brightness
@@ -152,7 +151,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     switch (layer) {
         case 0:
             rgb_matrix_mode_noeeprom(RGB_MATRIX_BAND_SAT);
-            rgb_matrix_set_speed_noeeprom(30); // Adjust the speed, 10 is an example value
+            rgb_matrix_set_speed_noeeprom(45); // Adjust the speed, 10 is an example value
             if (layer_light_enabled[0]) {
                 rgb_matrix_sethsv_noeeprom(HSV_RED); // White light if enabled
             } else {
@@ -160,25 +159,25 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             }
             break;
         case 1:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_UP_DOWN);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_UP_DOWN);
             rgb_matrix_set_speed_noeeprom(100);
-            rgb_matrix_sethsv_noeeprom(HSV_OCEAN_BLUE); // Ocean Blue for layer 1
+            rgb_matrix_sethsv_noeeprom(HSV_CREAM_PINK); // Ocean Blue for layer 1
             break;
         case 2:
             rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
-            rgb_matrix_set_speed_noeeprom(50);
-            rgb_matrix_sethsv_noeeprom(HSV_SOFT_ORANGE); // Soft Orange for layer 2
+            rgb_matrix_set_speed_noeeprom(45);
+            rgb_matrix_sethsv_noeeprom(HSV_OCEAN_BLUE); // Soft Orange for layer 2
             break;
         case 3:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_LEFT_RIGHT);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SPLASH);
             rgb_matrix_set_speed_noeeprom(100);
             rgb_matrix_sethsv_noeeprom(HSV_PASTEL_GREEN); // Pastel Green for layer 3
             break;
         case 4:
             if (layer_light_enabled[4]) {
-                rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_LEFT_RIGHT); // Different gradient mode
-                rgb_matrix_set_speed_noeeprom(100);
-                rgb_matrix_sethsv_noeeprom(HSV_CREAM_PINK);
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_BAND_SAT); // Different gradient mode
+                rgb_matrix_set_speed_noeeprom(45);
+                rgb_matrix_sethsv_noeeprom(HSV_SOFT_ORANGE);
             } else {
                 rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off lights if disabled
             }
@@ -248,6 +247,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (layer_state_is(1)) {
                     layer_off(1); // Turn off Layer 1 if it's already active
+                    layer_clear();
+                    layer_on(0);
                 } else {
                     layer_clear(); // Clear all active layers
                     layer_on(0);   // Activate Layer 0
@@ -260,6 +261,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 if (layer_state_is(2)) {
                     layer_off(2); // Turn off Layer 2 if it's already active
+                    layer_clear();
+                    layer_on(0);
                 } else {
                     layer_clear(); // Clear all active layers
                     layer_on(0);   // Activate Layer 0
