@@ -27,6 +27,9 @@
 #undef DEBOUNCE
 #define DEBOUNCE 0
 
+//layers
+#define LAYERS 5
+
 //NKRO
 #define FORCE_NKRO
 

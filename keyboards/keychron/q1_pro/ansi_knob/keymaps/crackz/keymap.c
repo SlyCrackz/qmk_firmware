@@ -51,6 +51,7 @@ enum custom_keycodes {
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    //General Windows
     [0] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
         GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
@@ -59,6 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,            KC_Z,     KC_X,     myC,     V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(3),KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
+    //Gaming Layer
     [1] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
         KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
@@ -67,6 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
         KC_LCTL,  KC_PSLS,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(3),KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
+    //Programming/Typist Layer
     [2] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
         GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
@@ -75,13 +78,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     COMMA,  PERIOD,   KC_SLSH,            KC_RSFT,  KC_UP,
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(3),KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
+    //Function Layer
     [3] = LAYOUT_ansi_82(
         KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK_MANAGER,  KC_FILE,  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
         TG_L2,  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,              KC_TRNS,
         L0_LIGHT_TOGGLE,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
         KC_TRNS,            KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  BAT_LVL,  NK_TOGG,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,   KC_TRNS,
-        KC_TRNS,  KC_TRNS,  KC_TRNS,                                TG_L1,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS)
+        KC_TRNS,  KC_TRNS,  KC_TRNS,                                TG_L1,                                KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS),
+
+    //Linux Layer
+    [4] = LAYOUT_ansi_82(
+        KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
+        KC_GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
+        TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
+        KC_CAPS,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,             KC_HOME,
+        KC_LSFT,            KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
+        KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, KC_RGUI,KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT)
 
 };
 
@@ -90,38 +103,81 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [1] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)},
     [2] = {ENCODER_CCW_CW(C(KC_MS_WH_DOWN), C(KC_MS_WH_UP))},
-    [3] = {ENCODER_CCW_CW(C(KC_MS_WH_DOWN), C(KC_MS_WH_UP))}
+    [3] = {ENCODER_CCW_CW(C(KC_MS_WH_DOWN), C(KC_MS_WH_UP))},
+    [4] = {ENCODER_CCW_CW(KC_VOLD, KC_VOLU)}
     };
 #endif // ENCODER_MAP_ENABLE
 
+/*
+ * Custom Keyboard LED Color Spectrum (Skewed HSV Values):
+ * - Observed Colors Based on Hue Values:
+ *   - 180: Purple-Blue - A mix between purple and blue shades.
+ *   - 210: Pink - A true pink color, base for creamy pink.
+ *   - 260: Orange-Red - More towards an orange-red hue.
+ *   - 344: Green - A green color, unusual for this high in the hue range.
+ *
+ * - Inferred Color Ranges:
+ *   - 0-179: Likely covers the red to blue-green spectrum, with reds in the lower end,
+ *            transitioning through oranges, yellows, and greens as the value increases.
+ *   - 181-209: Likely to cover shades between blue and pink, possibly including lighter
+ *              blues, aquas, and purples.
+ *   - 211-259: This range might include variations of pink, moving towards reds and
+ *              oranges as the value increases.
+ *   - 261-343: Likely covers a range from red-orange to yellow-green, possibly including
+ *              shades not typically seen at these higher hue values.
+ *   - 345-359: This small range might include unusual greens or other colors not typically
+ *              associated with these hue values.
+ *
+ * Note: This spectrum is unique to this keyboard and does not align with standard HSV expectations.
+ *       The colors mentioned are based on observed behavior and may vary slightly depending on LED type and settings.
+ */
+
+
 #define HSV_CWHITE 0, 0, 255          // Max saturation for white
+//#define HSV_RED 255, 255, 255  // Full saturation, softer brightness for a warm orange
 #define HSV_SOFT_ORANGE 25, 255, 180  // Full saturation, softer brightness for a warm orange
 #define HSV_OCEAN_BLUE 180, 255, 255  // Full saturation for a vivid ocean blue
 #define HSV_PASTEL_GREEN 85, 180, 255 // Lower saturation for a softer, pastel green
+#define HSV_CREAM_PINK 210, 210, 255  // Creamy pink: pink hue, reduced saturation, full brightness
 
-static bool layer0_light_enabled = false; // By default, the light is off
+static bool layer_light_enabled[5] = {false, true, true, true, true}; // Flags for each layer
+
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
+    uint8_t layer = get_highest_layer(state);
+    switch (layer) {
         case 0:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-            if (layer0_light_enabled) {
-                rgb_matrix_sethsv_noeeprom(HSV_CWHITE); // White light if enabled
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_BAND_SAT);
+            rgb_matrix_set_speed_noeeprom(30); // Adjust the speed, 10 is an example value
+            if (layer_light_enabled[0]) {
+                rgb_matrix_sethsv_noeeprom(HSV_RED); // White light if enabled
             } else {
                 rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off lights if disabled
             }
             break;
         case 1:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_UP_DOWN);
+            rgb_matrix_set_speed_noeeprom(100);
             rgb_matrix_sethsv_noeeprom(HSV_OCEAN_BLUE); // Ocean Blue for layer 1
             break;
         case 2:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+            rgb_matrix_set_speed_noeeprom(50);
             rgb_matrix_sethsv_noeeprom(HSV_SOFT_ORANGE); // Soft Orange for layer 2
             break;
         case 3:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_LEFT_RIGHT);
+            rgb_matrix_set_speed_noeeprom(100);
             rgb_matrix_sethsv_noeeprom(HSV_PASTEL_GREEN); // Pastel Green for layer 3
+            break;
+        case 4:
+            if (layer_light_enabled[4]) {
+                rgb_matrix_mode_noeeprom(RGB_MATRIX_GRADIENT_LEFT_RIGHT); // Different gradient mode
+                rgb_matrix_set_speed_noeeprom(100);
+                rgb_matrix_sethsv_noeeprom(HSV_CREAM_PINK);
+            } else {
+                rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off lights if disabled
+            }
             break;
         default:
             break;
@@ -133,11 +189,12 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
     if (record->tap.count == 0) {  // Key is being held.
         if (record->event.pressed) {
             switch (long_press_keycode) {
-                case TAB_TOGGLE:
-                    // Custom action for long press: Toggle lights
-                    layer0_light_enabled = !layer0_light_enabled;
+                case TAB_TOGGLE: {
+                    uint8_t layer = get_highest_layer(layer_state);
+                    layer_light_enabled[layer] = !layer_light_enabled[layer];
                     layer_state_set_user(layer_state);
                     break;
+                }
                 case KC_GRV_MACRO:
                     // Custom action for long press: Send triple grave accent
                     SEND_STRING("```");
@@ -293,6 +350,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
     }
 
+  if (layer_state_is(3)) { // Check if Layer 3 is active
+        switch (keycode) {
+            case KC_DEL:
+                if (record->event.pressed) {
+                    reset_keyboard(); // Reset the keyboard and enter bootloader mode
+                    return false; // Skip further processing of this key
+                }
+                break;
+
+            // Add any additional Layer 3 specific key handling here
+        }
+    }
+
     // Handle other layers or global keycodes here
 
     return true;
@@ -322,8 +392,11 @@ void keyboard_post_init_user(void) {
     startup_animation_running = true;
 
     // Set initial RGB state
-    layer0_light_enabled = false; // Set the flag to indicate that layer 0 lighting is off
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+    layer_light_enabled[0] = false;
+    layer_light_enabled[1] = true;
+    layer_light_enabled[2] = true;
+    layer_light_enabled[3] = true;
+    layer_light_enabled[4] = true;    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
     rgb_matrix_sethsv_noeeprom(0, 0, 0); // Turn off RGB lighting
 }
 

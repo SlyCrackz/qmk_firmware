@@ -38,7 +38,6 @@
     "rgb_matrix": {
         "driver": "CKLED2001",
         "animations": {
-            "breathing": false,
             "band_spiral_val": false,
             "cycle_all": false,
             "cycle_left_right": false,
@@ -58,7 +57,11 @@
             "solid_reactive_multiwide": false,
             "solid_reactive_multinexus": false,
             "splash": false,
-            "solid_splash": false
+            "solid_splash": false,
+            "gradient_left_right": true,
+            "gradient_up_down": true,
+            "band_sat": true,
+            "breathing": true
         }
     }
 }

@@ -24,6 +24,14 @@ To switch between layers, use the following keys:
 - **Special Keys:**
   - `Grave Key`: Hold for grave accent (```).
   - `TAB Key`: Toggle keyboard backlight.
+  - `W`: Tap for 'W', hold to open the web browser.
+  - `Q`: Tap for 'Q', hold for Alt+F4 (close application).
+  - `T`: Tap for 'T', hold to open terminal.
+  - `F`: Tap for 'F', hold to open files.
+  - `V`: Tap for 'V', hold to open VSCodium.
+  - `myC`: Tap for 'C', hold to open the calculator.
+  - `TAB`: Tap for 'Tab', hold for a custom light toggle.
+
 
 ### Layer 1: Gaming Layer
 - **Enhanced Gaming Keys**

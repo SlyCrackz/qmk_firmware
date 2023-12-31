@@ -57,13 +57,22 @@ static void pairing_key_timer_cb(void *arg) {
 #endif
 
 bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
+    if (!dip_switch_update_user(index, active)) {
+        return false;
     }
-    dip_switch_update_user(index, active);
+
+    if (index == 0) {
+        if (!active) {
+            layer_move(4); // Switch to Layer 4 when the dip switch is not active THIS IS LINUX MODE
+        } else {
+            layer_move(0); // Switch back to Layer 0 (or your default layer) when the dip switch is active THIS IS WINDOWS MODE
+        }
+    }
 
     return true;
 }
+
+
 
 #ifdef KC_BLUETOOTH_ENABLE
 bool process_record_kb_bt(uint16_t keycode, keyrecord_t *record) {
