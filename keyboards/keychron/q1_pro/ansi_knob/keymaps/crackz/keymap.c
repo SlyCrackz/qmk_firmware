@@ -347,6 +347,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     return false;
                 }
                 break;
+            case KC_G:
+                if (record->event.pressed && caps_lock_held) {
+                    SEND_STRING(SS_LGUI("r") SS_DELAY(150) "https://github.com" SS_DELAY(180) SS_TAP(X_ENTER));
+                    return false;
+                }
+                break;
             static uint16_t pseudo_random_seed = 0;
 
             case KC_R:
