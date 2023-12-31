@@ -188,9 +188,14 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
+
 //this uses powertoy run with that bound to lgui + space
-#define RUN_APPLICATION(app) do { \
-    SEND_STRING(SS_LGUI(" ") SS_DELAY(150) app SS_DELAY(180) SS_TAP(X_ENTER)); \
+#define HITWIN(app) do { \
+    SEND_STRING(SS_LGUI("") SS_DELAY(150) app SS_DELAY(180) SS_TAP(X_ENTER)); \
+} while (0)
+
+#define WRUN(app) do { \
+    SEND_STRING(SS_LGUI("r") SS_DELAY(150) app SS_DELAY(180) SS_TAP(X_ENTER)); \
 } while (0)
 
 static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_press_keycode) {
@@ -199,17 +204,17 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
             switch (long_press_keycode) {
                 case V:
                     // Press Windows key, wait 150ms, type 'vscode', wait 150ms, then press Enter
-                    RUN_APPLICATION("vscodium");
+                    HITWIN("vscodium");
                     break;
                 case T:
                     // Press Windows key, wait 150ms, type 'terminal', wait 150ms, then press Enter
-                    RUN_APPLICATION("terminal");
+                    HITWIN("terminal");
                     break;
                 case YOUTUBE:
-                    RUN_APPLICATION("https://youtube.com");
+                    WRUN("https://youtube.com");
                     break;
                 case STEAM:
-                    RUN_APPLICATION("steam");
+                    HITWIN("steam");
                     break;
                 case TAB_TOGGLE: {
                     uint8_t layer = get_highest_layer(layer_state);
@@ -348,19 +353,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
             case KC_C:
                 if (record->event.pressed && caps_lock_held) {
-                    RUN_APPLICATION("https://chat.openai.com");
+                    WRUN("https://chat.openai.com");
                     return false;
                 }
                 break;
             case KC_G:
                 if (record->event.pressed && caps_lock_held) {
-                    RUN_APPLICATION("https://github.com");
+                    WRUN("https://github.com");
                     return false;
                 }
                 break;
             case KC_T:
                 if (record->event.pressed && caps_lock_held) {
-                    RUN_APPLICATION("terminal");
+                    HITWIN("terminal");
                     return false;
                 }
                 break;
