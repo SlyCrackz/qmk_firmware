@@ -189,6 +189,14 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
     if (record->tap.count == 0) {  // Key is being held.
         if (record->event.pressed) {
             switch (long_press_keycode) {
+                case V:
+                    // Press Windows key, wait 150ms, type 'vscode', wait 150ms, then press Enter
+                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "vscod" SS_DELAY(150) SS_TAP(X_ENTER));
+                    break;
+                case T:
+                    // Press Windows key, wait 150ms, type 'terminal', wait 150ms, then press Enter
+                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "term" SS_DELAY(150) SS_TAP(X_ENTER));
+                    break;
                 case TAB_TOGGLE: {
                     uint8_t layer = get_highest_layer(layer_state);
                     layer_light_enabled[layer] = !layer_light_enabled[layer];
@@ -269,11 +277,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case Q:
                 return process_tap_or_long_press_key(record, A(KC_F4));
             case T:
-                return process_tap_or_long_press_key(record, G(KC_1));
+                return process_tap_or_long_press_key(record, T);
             case F:
                 return process_tap_or_long_press_key(record, G(KC_E));
             case V:
-                return process_tap_or_long_press_key(record, G(KC_2));
+                return process_tap_or_long_press_key(record, V);
             case myC:
                 return process_tap_or_long_press_key(record, KC_CALC);
             case TAB:
