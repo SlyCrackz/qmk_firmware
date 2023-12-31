@@ -29,6 +29,8 @@ enum custom_keycodes {
     TG_L1,
     TG_L2,
     KC_TASK_MANAGER,
+    YOUTUBE,
+    STEAM
     // Other custom keycodes...
 };
 
@@ -41,6 +43,8 @@ enum custom_keycodes {
 #define W LT(0, KC_W) // 0 is a placeholder layer, KC_W is the tap keycode
 #define Q LT(0, KC_Q) // 0 is a placeholder layer, KC_W is the tap keycode
 #define T LT(0, KC_T)
+#define myS LT(0, KC_S)
+#define Y LT(0, KC_Y)
 #define F LT(0, KC_F)
 #define V LT(0, KC_V)
 #define myC LT(0, KC_C)
@@ -55,8 +59,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_ansi_82(
         KC_ESC,   KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_DEL,             KC_MUTE,
         GRV,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,            KC_PGUP,
-        TAB,   Q,     W,     KC_E,     KC_R,     T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
-        KC_CAPS,  KC_A,     KC_S,     KC_D,     F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,             KC_HOME,
+        TAB,   Q,     W,     KC_E,     KC_R,     T,     Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGDN,
+        KC_CAPS,  KC_A,     myS,     KC_D,     F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,             KC_HOME,
         KC_LSFT,            KC_Z,     KC_X,     myC,     V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,            KC_RSFT,  KC_UP,
         KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT, MO(3),KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT),
 
@@ -191,11 +195,17 @@ static bool process_tap_or_long_press_key(keyrecord_t* record, uint16_t long_pre
             switch (long_press_keycode) {
                 case V:
                     // Press Windows key, wait 150ms, type 'vscode', wait 150ms, then press Enter
-                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "vscod" SS_DELAY(150) SS_TAP(X_ENTER));
+                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "vscod" SS_DELAY(180) SS_TAP(X_ENTER));
                     break;
                 case T:
                     // Press Windows key, wait 150ms, type 'terminal', wait 150ms, then press Enter
-                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "term" SS_DELAY(150) SS_TAP(X_ENTER));
+                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "term" SS_DELAY(180) SS_TAP(X_ENTER));
+                    break;
+                case YOUTUBE:
+                    SEND_STRING(SS_LGUI("r") SS_DELAY(150) "https://youtube.com" SS_DELAY(180) SS_TAP(X_ENTER));
+                    break;
+                case STEAM:
+                    SEND_STRING(SS_LGUI(SS_DELAY(150)) "steam" SS_DELAY(180) SS_TAP(X_ENTER));
                     break;
                 case TAB_TOGGLE: {
                     uint8_t layer = get_highest_layer(layer_state);
@@ -276,6 +286,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return process_tap_or_long_press_key(record, KC_WWW_HOME);
             case Q:
                 return process_tap_or_long_press_key(record, A(KC_F4));
+            case myS:
+                return process_tap_or_long_press_key(record, STEAM);
+            case Y:
+                return process_tap_or_long_press_key(record, YOUTUBE);
             case T:
                 return process_tap_or_long_press_key(record, T);
             case F:
@@ -320,6 +334,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case KC_HOME:
                 if (record->event.pressed && caps_lock_held) {
                     SEND_STRING(SS_TAP(X_HOME) SS_LSFT(SS_TAP(X_END)));
+                    return false;
+                }
+                break;
+
+            case KC_C:
+                if (record->event.pressed && caps_lock_held) {
+                    SEND_STRING(SS_LGUI("r") SS_DELAY(150) "https://chat.openai.com" SS_DELAY(180) SS_TAP(X_ENTER));
+                    return false;
+                }
+                break;
+            static uint16_t pseudo_random_seed = 0;
+
+            case KC_R:
+                if (record->event.pressed && caps_lock_held) {
+                    // Update the seed with timer and an incrementing value
+                    pseudo_random_seed += timer_read() ^ pseudo_random_seed;
+
+                    // Generate a pseudo-random number in the range 0-999
+                    uint16_t randomNumber = pseudo_random_seed % 1000; // Range is now 0-999
+
+                    // Convert the number to a string manually (for a three-digit number)
+                    char numStr[4];
+                    numStr[0] = '0' + (randomNumber / 100); // Hundreds place
+                    numStr[1] = '0' + ((randomNumber / 10) % 10); // Tens place
+                    numStr[2] = '0' + (randomNumber % 10); // Ones place
+                    numStr[3] = '\0'; // Null-terminator
+
+                    // Send the string
+                    SEND_STRING(numStr);
                     return false;
                 }
                 break;
@@ -412,5 +455,3 @@ void matrix_scan_user(void) {
     run_startup_animation();
     // Other code...
 }
-
-
