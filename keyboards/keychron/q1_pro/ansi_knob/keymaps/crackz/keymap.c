@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     //Function Layer
     [3] = LAYOUT_ansi_82(
-        KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK_MANAGER,  KC_FILE,  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
+        KC_TRNS,  KC_BRID,  KC_BRIU,  KC_TASK_MANAGER,  G(KC_E),  RGB_SAD,  RGB_SAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_TRNS,            RGB_TOG,
         TG_L2,  BT_HST1,  BT_HST2,  BT_HST3,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,              KC_TRNS,
         L0_LIGHT_TOGGLE,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,
         KC_TRNS,  KC_TRNS, KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS,            KC_TRNS,            KC_TRNS,
@@ -169,7 +169,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             rgb_matrix_sethsv_noeeprom(HSV_OCEAN_BLUE); // Soft Orange for layer 2
             break;
         case 3:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SPLASH);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_MULTISPLASH);
             rgb_matrix_set_speed_noeeprom(100);
             rgb_matrix_sethsv_noeeprom(HSV_PASTEL_GREEN); // Pastel Green for layer 3
             break;

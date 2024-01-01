@@ -38,7 +38,7 @@
     "rgb_matrix": {
         "driver": "CKLED2001",
         "animations": {
-            "splash": true,
+            "multisplash": true,
             "cycle_up_down": true,
             "band_sat": true,
             "breathing": true,
