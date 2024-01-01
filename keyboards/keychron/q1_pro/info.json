@@ -41,7 +41,8 @@
             "splash": true,
             "cycle_up_down": true,
             "band_sat": true,
-            "breathing": true
+            "breathing": true,
+            "riverflow": true
         }
     }
 }
